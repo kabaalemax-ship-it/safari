@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tour Packages & Pricing | Safari & City Tours</title>
+  <style>
+    /* === 1. CSS STYLING & LAYOUT (Task 2) === */
+    
+    /* Reset & Base Variables */
+    :root {
+      --primary-green: #1a4d2e; 
+      --accent-green: #4f9d69;  
+      --earth-orange: #e07a2f;  
+      --bg-light: #f4f7f5;      
+      --text-dark: #2c3e2f;
+      --text-light: #6b7c6f;
+      --white: #ffffff;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      line-height: 1.6; 
+      color: var(--text-dark); 
+      background: var(--bg-light); 
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    h1, h2, h3, h4 { color: var(--primary-green); margin-bottom: 0.5em; line-height: 1.3; }
+
+    /* Consistent Navigation Bar */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 15px 5%; background: var(--primary-green); color: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .navbar .logo { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.5px; }
+    .navbar nav { display: flex; gap: 20px; align-items: center; }
+    .navbar nav a { color: #eaf3ec; font-weight: 500; font-size: 0.95rem; transition: color 0.3s; }
+    .navbar nav a:hover { color: var(--accent-green); }
+    .navbar nav a.active { color: var(--accent-green); font-weight: 700; border-bottom: 2px solid var(--accent-green); }
+    .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; }
+
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      padding: 80px 20px 60px;
+      background: linear-gradient(135deg, var(--primary-green), #276542);
+      color: white;
+    }
+    .page-header h1 { color: white; font-size: 3rem; margin-bottom: 15px; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+    .page-header p { color: #d1e6d9; font-size: 1.2rem; max-width: 700px; margin: 0 auto; }
+
+    /* Main Content */
+    .content-section { padding: 80px 5%; max-width: 1100px; margin: 0 auto; }
+    
+    /* Table Styling */
+    .table-wrap { 
+      overflow-x: auto; 
+      background: white; 
+      border-radius: 12px; 
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08); 
+      margin-bottom: 30px; 
+    }
+    table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      min-width: 600px; 
+    }
+    thead { 
+      background: var(--primary-green); 
+      color: white; 
+    }
+    th, td { 
+      padding: 18px 20px; 
+      text-align: left; 
+      font-size: 1rem; 
+      border-bottom: 1px solid #eee; 
+    }
+    tbody tr:nth-child(even) { background: #f9fbf9; }
+    tbody tr:hover { background: #f0f7f2; }
+    .price-col { 
+      font-weight: 700; 
+      color: var(--earth-orange); 
+      font-size: 1.1rem;
+    }
+
+    .note { 
+      text-align: center; 
+      color: var(--text-light); 
+      margin-bottom: 40px; 
+      font-style: italic; 
+      font-size: 0.95rem;
+    }
+
+    .btn-container { text-align: center; margin-bottom: 60px; }
+    .btn { 
+      display: inline-block; 
+      background: var(--earth-orange); 
+      color: white; 
+      padding: 14px 32px; 
+      border-radius: 8px; 
+      font-weight: 700; 
+      font-size: 1.05rem; 
+      transition: 0.3s; 
+      box-shadow: 0 4px 15px rgba(224, 122, 47, 0.4); 
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover { background: #c4651f; transform: translateY(-3px); }
+
+    /* Included Grid */
+    .included-header { text-align: center; margin-bottom: 40px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+    .feature { 
+      background: white; 
+      padding: 30px; 
+      border-radius: 12px; 
+      text-align: center; 
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05); 
+      border-top: 4px solid var(--accent-green); 
+      transition: 0.3s; 
+    }
+    .feature:hover { transform: translateY(-5px); }
+    .feature-icon { font-size: 2.5rem; margin-bottom: 15px; }
+    .feature h3 { font-size: 1.2rem; margin-bottom: 10px; }
+    .feature p { color: var(--text-light); font-size: 0.95rem; }
+
+    /* Footer */
+    footer { background: var(--primary-green); color: #d1e6d9; padding: 60px 5% 20px; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto 40px; }
+    .footer-col h4 { color: white; margin-bottom: 20px; font-size: 1.1rem; }
+    .footer-col a, .footer-col p { display: block; color: #b0c9b8; margin-bottom: 10px; font-size: 0.95rem; }
+    .footer-col a:hover { color: var(--accent-green); }
+    .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); color: #8ea896; font-size: 0.9rem; }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .navbar nav { 
+        position: absolute; top: 100%; left: 0; right: 0; 
+        flex-direction: column; background: var(--primary-green); 
+        padding: 20px; display: none; gap: 15px; 
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
+      }
+      .navbar nav.open { display: flex; }
+      .page-header h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CONSISTENT TOP NAVIGATION -->
+  <header class="navbar">
+    <div class="logo">🌿 Safari & City Tours</div>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <nav id="navMenu">
+      <a href="index.html">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html" class="active">Packages</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+    <h1>Tour Packages & Pricing</h1>
+    <p>Choose the perfect package that fits your budget, schedule, and travel style.</p>
+  </section>
+
+  <!-- MAIN CONTENT (TABLE) -->
+  <section class="content-section">
+    
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Package Name</th>
+            <th>Destination</th>
+            <th>Duration</th>
+            <th>Price (UGX)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>City Day Tour</td>
+            <td>Kampala</td>
+            <td>1 day</td>
+            <td class="price-col">150,000</td>
+          </tr>
+          <tr>
+            <td>Wildlife Safari</td>
+            <td>Murchison Falls</td>
+            <td>3 days</td>
+            <td class="price-col">850,000</td>
+          </tr>
+          <tr>
+            <td>Park Explorer</td>
+            <td>Queen Elizabeth Park</td>
+            <td>2 days</td>
+            <td class="price-col">600,000</td>
+          </tr>
+          <tr>
+            <td>Beach Getaway</td>
+            <td>Lake Victoria</td>
+            <td>1 day</td>
+            <td class="price-col">200,000</td>
+          </tr>
+          <tr>
+            <td>Lake Escape</td>
+            <td>Lake Bunyonyi</td>
+            <td>2 days</td>
+            <td class="price-col">550,000</td>
+          </tr>
+          <tr>
+            <td>Grand Uganda Tour</td>
+            <td>Multiple Parks</td>
+            <td>7 days</td>
+            <td class="price-col">2,500,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <p class="note">* Prices include transport, professional guide, and meals. Accommodation is optional and can be added on request.</p>
+    
+    <div class="btn-container">
+      <a href="contact.html" class="btn">Book a Package</a>
+    </div>
+
+    <!-- INCLUDED FEATURES -->
+    <div class="included-header">
+      <h2>What's Included in Every Package</h2>
+    </div>
+    
+    <div class="grid">
+      <div class="feature">
+        <div class="feature-icon">🚐</div>
+        <h3>Transport</h3>
+        <p>Comfortable, air-conditioned 4x4 vehicles with a professional driver.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🍽️</div>
+        <h3>Meals</h3>
+        <p>Delicious breakfast, lunch, and dinner as listed in the itinerary.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎟️</div>
+        <h3>Park Fees</h3>
+        <p>All national park entry fees and necessary ranger charges covered.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CONSISTENT FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Safari & City Tours</h4>
+        <p>Your trusted partner for authentic Ugandan gorilla trekking, wildlife safaris, and city tours since 2015.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Safari Packages</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <p>📍 Plot 12, Kampala Road, Kampala</p>
+        <p>📞 +256 760 396 687</p>
+        <p>✉️ info@safaricytours.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2027 Safari & City Tours. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- === 3. BASIC INTERACTION (Task 3) === -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      
+      // Mobile Menu Toggle Logic
+      const toggle = document.getElementById("menuToggle");
+      const nav = document.getElementById("navMenu");
+      
+      if (toggle && nav) {
+        toggle.addEventListener("click", function () {
+          // Toggles the 'open' class to show/hide the navigation menu
+          nav.classList.toggle("open");
+          
+          // Changes the hamburger icon to an 'X' when open
+          if (nav.classList.contains("open")) {
+            toggle.textContent = "✕";
+          } else {
+            toggle.textContent = "☰";
+          }
+        });
+      }
+      
+    });
+  </script>
+</body>
+</html>

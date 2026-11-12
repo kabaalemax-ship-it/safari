@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Safari & City Tours | Uganda Safaris</title>
+  <style>
+    :root {
+      --primary-green: #1a4d2e; 
+      --accent-green: #4f9d69;  
+      --earth-orange: #e07a2f;  
+      --bg-light: #f4f7f5;      
+      --text-dark: #2c3e2f;
+      --text-light: #6b7c6f;
+      --white: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text-dark); background: var(--bg-light); }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    h1, h2, h3, h4 { color: var(--primary-green); margin-bottom: 0.5em; line-height: 1.3; }
+
+    /* Navbar */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 15px 5%; background: var(--primary-green); color: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .navbar .logo { font-size: 1.3rem; font-weight: 800; }
+    .navbar nav { display: flex; gap: 20px; align-items: center; }
+    .navbar nav a { color: #eaf3ec; font-weight: 500; font-size: 0.95rem; transition: color 0.3s; }
+    .navbar nav a:hover { color: var(--accent-green); }
+    .navbar nav a.active { color: var(--accent-green); font-weight: 700; border-bottom: 2px solid var(--accent-green); }
+    .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; }
+
+    /* Hero Slideshow */
+    .hero-slideshow { position: relative; height: 85vh; min-height: 600px; overflow: hidden; background: #000; }
+    .slide {
+      position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out;
+      background-size: cover; background-position: center;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+    }
+    .slide.active { opacity: 1; }
+    .slide::after { content: ''; position: absolute; inset: 0; background: rgba(26, 77, 46, 0.65); }
+    .hero-content { position: relative; z-index: 2; max-width: 900px; padding: 20px; color: white; }
+    .hero-content h1 { font-size: 3.5rem; color: white; text-shadow: 0 4px 15px rgba(0,0,0,0.6); margin-bottom: 15px; }
+    .hero-content p { font-size: 1.3rem; margin-bottom: 30px; text-shadow: 0 2px 8px rgba(0,0,0,0.6); font-weight: 500; }
+    
+    .hero-btns { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-weight: 700; font-size: 1.05rem; transition: 0.3s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--earth-orange); color: white; box-shadow: 0 4px 15px rgba(224, 122, 47, 0.4); }
+    .btn-primary:hover { background: #c4651f; transform: translateY(-3px); }
+    .btn-secondary { background: transparent; border: 2px solid white; color: white; }
+    .btn-secondary:hover { background: white; color: var(--primary-green); }
+
+    /* Packages */
+    .packages-preview { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 50px; }
+    .section-header h2 { font-size: 2.5rem; }
+    .section-header p { color: var(--text-light); font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+    .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: 0.3s; display: flex; flex-direction: column; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
+    .card img { width: 100%; height: 220px; object-fit: cover; }
+    .card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+    .card-meta { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--accent-green); font-weight: 700; margin-bottom: 10px; text-transform: uppercase; }
+    .card h3 { font-size: 1.3rem; margin-bottom: 10px; }
+    .card p { color: var(--text-light); font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; }
+    .card-link { color: var(--earth-orange); font-weight: 700; }
+
+    /* Footer */
+    footer { background: var(--primary-green); color: #d1e6d9; padding: 60px 5% 20px; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto 40px; }
+    .footer-col h4 { color: white; margin-bottom: 20px; font-size: 1.1rem; }
+    .footer-col a, .footer-col p { display: block; color: #b0c9b8; margin-bottom: 10px; font-size: 0.95rem; }
+    .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); color: #8ea896; font-size: 0.9rem; }
+
+    /* Responsive */
+    @media (max-width: 900px) { .hero-content h1 { font-size: 2.5rem; } }
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .navbar nav { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--primary-green); padding: 20px; display: none; gap: 15px; }
+      .navbar nav.open { display: flex; }
+      .hero-slideshow { height: 70vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">🌿 Safari & City Tours</div>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <nav id="navMenu">
+      <a href="index.html" class="active">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html">Packages</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero-slideshow">
+    
+    <!-- Slide 1: Gorilla -->
+    <div class="slide active" style="background-image: url('gollira.png');">
+      <div class="hero-content">
+        <h1>Welcome to Safari & City Tours</h1>
+        <p>Encounter the magnificent Mountain Gorillas in the misty forests of Bwindi. Your once-in-a-lifetime adventure starts here.</p>
+        <div class="hero-btns">
+          <a href="packages.html" class="btn btn-primary">View Safari Packages</a>
+          <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Elephant -->
+    <div class="slide" style="background-image: url('elephant.png');">
+      <div class="hero-content">
+        <h1>Experience the Untamed Savannah</h1>
+        <p>From majestic lions to towering elephants, discover the breathtaking wildlife of Uganda's golden plains.</p>
+        <div class="hero-btns">
+          <a href="packages.html" class="btn btn-primary">View Safari Packages</a>
+          <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Lion -->
+    <div class="slide" style="background-image: url('lion.png');">
+      <div class="hero-content">
+        <h1>The King of Beasts</h1>
+        <p>Spot majestic lions resting in the golden grass of Queen Elizabeth National Park.</p>
+        <div class="hero-btns">
+          <a href="destinations.html" class="btn btn-primary">Explore Destinations</a>
+          <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Giraffes & Zebras -->
+    <div class="slide" style="background-image: url('gillaffe.png');">
+      <div class="hero-content">
+        <h1>Giraffes & Zebras</h1>
+        <p>Watch towering giraffes and striped zebras gracefully navigate the golden plains of Murchison Falls.</p>
+        <div class="hero-btns">
+          <a href="destinations.html" class="btn btn-primary">Explore Destinations</a>
+          <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: Lake Bunyonyi -->
+    <div class="slide" style="background-image: url('bunyonyi.png');">
+      <div class="hero-content">
+        <h1>Serenity at Lake Bunyonyi</h1>
+        <p>Paddle through terraced hills and tranquil waters on one of Africa's most beautiful and peaceful lakes.</p>
+        <div class="hero-btns">
+          <a href="destinations.html" class="btn btn-primary">Explore Destinations</a>
+          <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: Murchison Falls -->
+    <div class="slide" style="background-image: url('nile.png');">
+      <div class="hero-content">
+        <h1>The Mighty Nile River</h1>
+        <p>Experience the legendary Nile squeezing through a 7-meter gorge at the powerful Murchison Falls.</p>
+        <div class="hero-btns">
+          <a href="packages.html" class="btn btn-primary">View Safari Packages</a>
+          <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: Rhinos -->
+    <div class="slide" style="background-image: url('rhino.png');">
+      <div class="hero-content">
+        <h1>Conservation Safaris</h1>
+        <p>Visit the Ziwa Rhino Sanctuary to track these magnificent creatures on foot.</p>
+        <div class="hero-btns">
+          <a href="destinations.html" class="btn btn-primary">Explore Destinations</a>
+          <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- SAFARI PACKAGES PREVIEW -->
+  <section class="packages-preview">
+    <div class="section-header">
+      <h2>Our Most Popular Tours</h2>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <img src="gollira.png" alt="Gorilla Trekking">
+        <div class="card-content">
+          <div class="card-meta"><span>3 Days</span><span>From $1,500</span></div>
+          <h3>Express Gorilla Trek</h3>
+          <p>Includes your gorilla permit, 2 nights accommodation, and private 4x4 transport to Bwindi.</p>
+          <a href="packages.html" class="card-link">View Itinerary →</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="lion.png" alt="Lion Safari">
+        <div class="card-content">
+          <div class="card-meta"><span>5 Days</span><span>From $2,800</span></div>
+          <h3>Big Cats & Wildlife Escape</h3>
+          <p>Track lions, leopards, and elephants in the stunning savannahs, with premium lodges.</p>
+          <a href="packages.html" class="card-link">View Itinerary →</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="gillaffe.png" alt="Giraffe and Zebra Safari">
+        <div class="card-content">
+          <div class="card-meta"><span>7 Days</span><span>From $3,200</span></div>
+          <h3>Grand Uganda Safari</h3>
+          <p>Combine game drives with giraffes and zebras, a Nile boat cruise, and relaxing afternoons by beautiful lakes.</p>
+          <a href="packages.html" class="card-link">View Itinerary →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Safari & City Tours</h4>
+        <p>Your trusted partner for authentic Ugandan safaris since 2015.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Safari Packages</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <p>📍 Plot 12, Kampala Road, Kampala</p>
+        <p>📞 +256 760 396 687</p>
+        <p>✉️ info@safaricytours.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2027 Safari & City Tours. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggle = document.getElementById("menuToggle");
+      const nav = document.getElementById("navMenu");
+      if (toggle && nav) {
+        toggle.addEventListener("click", function () {
+          nav.classList.toggle("open");
+          toggle.textContent = nav.classList.contains("open") ? "✕" : "☰";
+        });
+      }
+
+      const slides = document.querySelectorAll(".slide");
+      let currentSlide = 0;
+
+      function nextSlide() {
+        slides[currentSlide].classList.remove("active");
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add("active");
+      }
+
+      setInterval(nextSlide, 2000);
+    });
+  </script>
+</body>
+</html>

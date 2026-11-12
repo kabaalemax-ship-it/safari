@@ -1,0 +1,802 @@
+/* =========================================================
+   SAFARI & CITY TOURS — MASTER STYLESHEET
+   ========================================================= */
+
+/* ---------- RESET & BASE ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #2b2b2b;
+  background: #faf8f4;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1, h2, h3, h4 {
+  margin: 0 0 0.5em;
+  line-height: 1.25;
+  color: #1f3d2b;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+/* ---------- BUTTONS ---------- */
+.btn {
+  display: inline-block;
+  background: #e07a2f;
+  color: #fff;
+  padding: 12px 26px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.15s ease;
+}
+
+.btn:hover {
+  background: #c4651f;
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: #1f3d2b;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.navbar .logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #fff;
+}
+
+.navbar nav {
+  display: flex;
+  gap: 6px;
+}
+
+.navbar nav a {
+  color: #eaf3ec;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.navbar nav a:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.navbar nav a.active {
+  background: #e07a2f;
+  color: #fff;
+}
+
+/* Hamburger (mobile) */
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* =========================================================
+   PAGE HEADER (destinations / packages / contact)
+   ========================================================= */
+.page-header {
+  text-align: center;
+  padding: 56px 20px 40px;
+  background: linear-gradient(135deg, #1f3d2b 0%, #2e5a3f 100%);
+  color: #fff;
+}
+
+.page-header h1 {
+  color: #fff;
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  color: #dbe8de;
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* =========================================================
+   HERO — HOME (image slider)
+   ========================================================= */
+.hero-gallery {
+  position: relative;
+  height: 80vh;
+  min-height: 480px;
+  overflow: hidden;
+  background: #000;
+}
+
+.hero-gallery-slider {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-gallery-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.8s ease;
+}
+
+.hero-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-slide-caption {
+  position: absolute;
+  left: 24px;
+  bottom: 130px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 10px;
+  max-width: 420px;
+  backdrop-filter: blur(3px);
+}
+
+.hero-slide-caption h3 {
+  margin: 0 0 6px;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.hero-slide-caption p {
+  margin: 0;
+  font-size: 0.92rem;
+  opacity: 0.92;
+}
+
+/* Arrows */
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  border: none;
+  font-size: 1.6rem;
+  padding: 10px 16px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 3;
+  transition: background 0.2s ease;
+}
+
+.hero-arrow.prev { left: 16px; }
+.hero-arrow.next { right: 16px; }
+
+.hero-arrow:hover { background: rgba(0, 0, 0, 0.75); }
+
+/* Dots */
+.hero-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+
+.hero-dots button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.hero-dots button.active {
+  background: #fff;
+  transform: scale(1.25);
+}
+
+/* Hero text overlay (home) */
+.hero-text-overlay {
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #fff;
+  z-index: 4;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 22px 32px;
+  border-radius: 14px;
+  max-width: 640px;
+  width: 90%;
+  backdrop-filter: blur(3px);
+}
+
+.hero-text-overlay h1 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+  color: #fff;
+}
+
+.hero-text-overlay p {
+  margin: 0 0 14px;
+  color: #f0f0f0;
+}
+
+/* =========================================================
+   HERO — DESTINATIONS (video background)
+   ========================================================= */
+.hero-video {
+  position: relative;
+  height: 80vh;
+  min-height: 480px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+.hero-video .bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-video::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.hero-video .hero-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  padding: 20px;
+  max-width: 720px;
+}
+
+.hero-video .hero-text h1 {
+  color: #fff;
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+.hero-video .hero-text p {
+  color: #f0f0f0;
+  font-size: 1.1rem;
+  margin-bottom: 22px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* =========================================================
+   INTRO SECTION (home)
+   ========================================================= */
+.intro {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 70px 24px;
+  text-align: center;
+}
+
+.intro h2 {
+  font-size: 1.9rem;
+}
+
+.intro p {
+  font-size: 1.05rem;
+  color: #4a4a4a;
+}
+
+/* =========================================================
+   VIDEO SECTION (packages / contact / home legacy)
+   ========================================================= */
+.video-section {
+  text-align: center;
+  padding: 60px 24px;
+  background: #eef3ee;
+}
+
+.video-section h2 {
+  font-size: 1.8rem;
+}
+
+.video-section p {
+  color: #555;
+  margin-bottom: 26px;
+}
+
+.video-wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.video-wrap video,
+.video-section video {
+  width: 100%;
+  display: block;
+  border-radius: 14px;
+}
+
+/* =========================================================
+   HIGHLIGHTS / CARD GRID
+   ========================================================= */
+.highlights {
+  padding: 70px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.highlights h2 {
+  text-align: center;
+  font-size: 1.9rem;
+}
+
+.section-sub,
+.highlights > .section-sub {
+  text-align: center;
+  color: #666;
+  margin-bottom: 36px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card h3 {
+  margin: 16px 18px 8px;
+  font-size: 1.15rem;
+}
+
+.card p {
+  margin: 0 18px 18px;
+  color: #5a5a5a;
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+/* =========================================================
+   WHY US / FEATURES
+   ========================================================= */
+.why-us,
+.included {
+  padding: 70px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.why-us h2,
+.included h2 {
+  text-align: center;
+  font-size: 1.9rem;
+  margin-bottom: 36px;
+}
+
+.feature {
+  background: #fff;
+  border-radius: 14px;
+  padding: 28px 22px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  transition: transform 0.25s ease;
+}
+
+.feature:hover {
+  transform: translateY(-4px);
+}
+
+.feature-icon {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+}
+
+.feature h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.feature p {
+  color: #5a5a5a;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* =========================================================
+   PACKAGES PAGE
+   ========================================================= */
+.packages-intro {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 50px 24px 10px;
+  text-align: center;
+  color: #4a4a4a;
+  font-size: 1.02rem;
+}
+
+.packages {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 24px 70px;
+}
+
+.packages h2 {
+  text-align: center;
+  font-size: 1.9rem;
+  margin-bottom: 28px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  min-width: 560px;
+}
+
+thead {
+  background: #1f3d2b;
+  color: #fff;
+}
+
+th,
+td {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+tbody tr:nth-child(even) {
+  background: #f5f8f5;
+}
+
+tbody tr:hover {
+  background: #eaf3ec;
+}
+
+td {
+  border-bottom: 1px solid #eee;
+}
+
+.note {
+  text-align: center;
+  color: #777;
+  font-size: 0.88rem;
+  margin: 18px 0 26px;
+}
+
+.packages .btn {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   CONTACT PAGE
+   ========================================================= */
+.contact-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 24px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+}
+
+.form-wrap,
+.office-info {
+  background: #fff;
+  border-radius: 14px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.form-wrap h2,
+.office-info h2 {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.form-sub {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 22px;
+}
+
+form label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 6px;
+  color: #1f3d2b;
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid #d4dcd6;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  margin-bottom: 18px;
+  background: #fbfdfb;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #e07a2f;
+  box-shadow: 0 0 0 3px rgba(224, 122, 47, 0.15);
+}
+
+form textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+form .btn {
+  width: 100%;
+}
+
+.office-info p {
+  font-size: 0.96rem;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+.map-placeholder {
+  margin-top: 20px;
+  padding: 40px 20px;
+  text-align: center;
+  background: #eef3ee;
+  border: 2px dashed #b9c9bc;
+  border-radius: 10px;
+  color: #6b7c6f;
+  font-weight: 600;
+}
+
+/* =========================================================
+   VIDEO MODAL (destinations)
+   ========================================================= */
+.video-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.video-modal.open {
+  display: flex;
+}
+
+.video-modal-content {
+  position: relative;
+  background: #111;
+  border-radius: 14px;
+  max-width: 860px;
+  width: 100%;
+  padding: 18px;
+}
+
+.video-modal-content h3 {
+  color: #fff;
+  margin: 0 0 12px;
+  font-size: 1.2rem;
+}
+
+.video-holder video {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
+.modal-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: #e07a2f;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.modal-close:hover {
+  background: #c4651f;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+  background: #1f3d2b;
+  color: #dbe8de;
+  text-align: center;
+  padding: 28px 20px;
+  font-size: 0.9rem;
+}
+
+footer p {
+  margin: 6px 0;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 860px) {
+  .contact-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  /* Navbar collapses */
+  .menu-toggle {
+    display: block;
+  }
+
+  .navbar nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: #1f3d2b;
+    padding: 10px 16px 16px;
+    gap: 4px;
+    display: none;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .navbar nav.open {
+    display: flex;
+  }
+
+  .navbar nav a {
+    width: 100%;
+    padding: 10px 12px;
+  }
+
+  /* Hero adjustments */
+  .hero-gallery,
+  .hero-video {
+    height: 70vh;
+    min-height: 420px;
+  }
+
+  .hero-text-overlay {
+    padding: 16px 20px;
+    bottom: 24px;
+  }
+
+  .hero-text-overlay h1 { font-size: 1.5rem; }
+  .hero-video .hero-text h1 { font-size: 1.7rem; }
+
+  .hero-slide-caption {
+    left: 12px;
+    right: 12px;
+    bottom: 120px;
+    max-width: none;
+  }
+
+  .page-header h1 { font-size: 1.7rem; }
+
+  .intro, .highlights, .why-us, .included,
+  .packages, .video-section {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar { padding: 12px 16px; }
+  .navbar .logo { font-size: 1.05rem; }
+
+  .hero-arrow {
+    font-size: 1.2rem;
+    padding: 8px 12px;
+  }
+
+  .btn { padding: 10px 20px; }
+
+  .form-wrap, .office-info { padding: 24px 18px; }
+}
